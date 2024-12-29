@@ -1,42 +1,42 @@
-'use client'
-import { useCodeEditorStore } from '@/store/useCodeEditorStore';
-import React, { useEffect, useRef, useState } from 'react'
-import { THEMES } from '../_constants';
-import { AnimatePresence, motion } from 'framer-motion'
-import { CircleOff, Cloud, Github, Laptop, Moon, Palette, Sun } from 'lucide-react';
-const ThemeSelector = () => {
+"use client";
+
+import { useCodeEditorStore } from "@/store/useCodeEditorStore";
+import React, { useEffect, useRef, useState } from "react";
+import { THEMES } from "../_constants";
+import { AnimatePresence, motion } from "framer-motion";
+import { CircleOff, Cloud, Github, Laptop, Moon, Palette, Sun } from "lucide-react";
+import useMounted from "@/hooks/useMounted";
+
+const THEME_ICONS: Record<string, React.ReactNode> = {
+  "vs-dark": <Moon className="size-4" />,
+  "vs-light": <Sun className="size-4" />,
+  "github-dark": <Github className="size-4" />,
+  monokai: <Laptop className="size-4" />,
+  "solarized-dark": <Cloud className="size-4" />,
+};
+
+function ThemeSelector() {
   const [isOpen, setIsOpen] = useState(false);
+  const mounted = useMounted();
   const { theme, setTheme } = useCodeEditorStore();
-  const [mounted,setMounted]=useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currentTheme = THEMES.find((t) => t.id === theme);
-  const THEME_ICONS: Record<string, React.ReactNode> = {
-    "vs-dark": <Moon className="size-4" />,
-    "vs-light": <Sun className="size-4" />,
-    "github-dark": <Github className="size-4" />,
-    monokai: <Laptop className="size-4" />,
-    "solarized-dark": <Cloud className="size-4" />,
-  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-    }
-  }, [])
-  useEffect(() => {
-    setMounted(true);
-  },[])
+  if (!mounted) return null;
 
-  if(!mounted) return null;
   return (
-    <div className='relative' ref={dropdownRef}>
-
+    <div className="relative" ref={dropdownRef}>
       <motion.button
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
@@ -44,7 +44,6 @@ const ThemeSelector = () => {
         className="w-48 group relative flex items-center gap-2 px-4 py-2.5 bg-[#1e1e2e]/80 hover:bg-[#262637] 
         rounded-lg transition-all duration-200 border border-gray-800/50 hover:border-gray-700"
       >
-
         {/* hover state bg decorator */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -60,8 +59,8 @@ const ThemeSelector = () => {
           className="relative w-4 h-4 rounded-full border border-gray-600 group-hover:border-gray-500 transition-colors"
           style={{ background: currentTheme?.color }}
         />
-
       </motion.button>
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -128,9 +127,7 @@ const ThemeSelector = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
-  )
+  );
 }
-
-export default ThemeSelector
+export default ThemeSelector;
