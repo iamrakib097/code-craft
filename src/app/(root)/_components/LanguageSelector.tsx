@@ -10,6 +10,7 @@ import useMounted from "@/hooks/useMounted";
 function LanguageSelector({ hasAccess }: { hasAccess: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const mounted = useMounted();
+  hasAccess=true;
 
   const { language, setLanguage } = useCodeEditorStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
