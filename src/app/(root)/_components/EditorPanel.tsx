@@ -3,7 +3,7 @@ import { useCodeEditorStore } from "@/store/useCodeEditorStore"
 import { useEffect, useState } from "react"
 import { defineMonacoThemes, LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
-import { div } from "framer-motion/client";
+
 import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion"

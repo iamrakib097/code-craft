@@ -2,7 +2,7 @@
 
 import { getExecutionResult, useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { useUser } from "@clerk/nextjs"
-import { Loader2, PlayIcon,Play } from "lucide-react";
+import { Loader2,Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";

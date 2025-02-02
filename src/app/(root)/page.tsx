@@ -1,4 +1,3 @@
-import { SignOutButton, SignUpButton } from "@clerk/nextjs";
 import OutputPanel from "./_components/OutputPanel";
 import EditorPanel from "./_components/EditorPanel";
 import Header from "./_components/Header";
