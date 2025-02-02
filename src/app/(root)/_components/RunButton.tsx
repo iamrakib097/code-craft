@@ -8,7 +8,7 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 const RunButton = () => {
   const {user} =useUser();
-  const {runCode,language,isRunning,executionResult}=useCodeEditorStore();
+  const {runCode,language,isRunning}=useCodeEditorStore();
   const saveExecution =useMutation(api.codeExecutions.saveExecution);
   const handleRun=async()=>{
     await runCode();
